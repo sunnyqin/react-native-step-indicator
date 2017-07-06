@@ -185,7 +185,8 @@ export default class StepIndicator extends PureComponent {
       let stepStyle;
       let indicatorLabelStyle;
       const separatorStyle = (direction === 'vertical') ? { width: this.customStyles.separatorStrokeWidth, zIndex:10 } : { height: this.customStyles.separatorStrokeWidth }
-      switch (this.getStepStatus(position)) {
+      const status = this.getStepStatus(position)
+      switch (status) {
         case STEP_STATUS.CURRENT: {
           stepStyle = {
             backgroundColor:this.customStyles.stepIndicatorCurrentColor,
@@ -229,7 +230,7 @@ export default class StepIndicator extends PureComponent {
 
       return (
         <Animated.View key={'step-indicator'} removeClippedSubviews style={[styles.step , stepStyle ]}>
-          <Text style={indicatorLabelStyle}>{ position + 1 }</Text>
+          {(status === STEP_STATUS.FINISHED) && this.props.renderIndicatorView && this.props.renderIndicatorView()}
         </Animated.View>
       );
     }
@@ -292,7 +293,8 @@ export default class StepIndicator extends PureComponent {
     step: {
       alignItems:'center',
       justifyContent:'center',
-      zIndex: 2
+      zIndex: 2,
+      elevation:3
     },
     stepContainer: {
       flex:1,
