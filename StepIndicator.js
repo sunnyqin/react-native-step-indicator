@@ -230,7 +230,7 @@ export default class StepIndicator extends PureComponent {
       }
 
       return (
-        <Animated.View key={'step-indicator'} removeClippedSubviews style={[styles.step , stepStyle ]}>
+        <Animated.View key={'step-indicator'} style={[styles.step , stepStyle ]}>
           {(status === STEP_STATUS.FINISHED) && this.props.renderIndicatorView && this.props.renderIndicatorView()}
           {(position === stepCount - 1) && this.props.showOther && this.props.renderOtherView && this.props.renderOtherView()}
         </Animated.View>
